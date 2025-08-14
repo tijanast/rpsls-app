@@ -1,0 +1,71 @@
+services:
+  game-service:
+    build: 
+      context: .
+      dockerfile: ./game-service/Dockerfile
+    container_name: game-service
+    ports:
+      - "5001:80"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      RANDOM_SERVICE_URL: http://random-service
+      SCOREBOARD_SERVICE_URL: http://scoreboard-service
+    depends_on:
+      - random-service
+      - scoreboard-service
+    networks:
+      - rpsls-net
+
+  random-service:
+    build:
+      context: .
+      dockerfile: ./random-service/Dockerfile
+    container_name: random-service
+    ports:
+      - "5003:80"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    networks:
+      - rpsls-net
+
+  scoreboard-service:
+    build:
+      context: .
+      dockerfile: ./scoreboard-service/Dockerfile
+    container_name: scoreboard-service
+    ports:
+      - "5002:80"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: "Server=rpsls-sql;Database=ScoreboardDb;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True;"
+    depends_on:
+      mssql:
+        condition: service_healthy
+    networks:
+      - rpsls-net
+    volumes:
+      - scoreboard_migrations:/app/migrations
+
+  mssql:
+    image: mcr.microsoft.com/azure-sql-edge
+    container_name: rpsls-sql
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=YourStrong!Passw0rd
+    ports:
+      - "1433:1433"
+    networks:
+      - rpsls-net
+    healthcheck:
+      test: [ "CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P YourStrong!Passw0rd -Q 'SELECT 1'" ]
+      interval: 10s
+      retries: 10
+      start_period: 10s
+      timeout: 5s
+
+networks:
+  rpsls-net:
+
+volumes:
+  mssql_data:
+  scoreboard_migrations:

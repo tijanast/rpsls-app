@@ -1,0 +1,36 @@
+services:
+  game-service:
+    build: ./game-service
+    container_name: game-service
+    ports:
+      - "5000:80"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      RANDOM_SERVICE_URL: http://random-service
+      SCOREBOARD_SERVICE_URL: http://scoreboard-service
+    depends_on:
+      - random-service
+      - scoreboard-service
+
+  random-service:
+    build: ./random-service
+    container_name: random-service
+    ports:
+      - "5001:80"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      EXTERNAL_RANDOM_URL: https://codechallenge.boohma.com/random
+
+  scoreboard-service:
+    build: ./scoreboard-service
+    container_name: scoreboard-service
+    ports:
+      - "5002:80"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      DATABASE_PATH: /data/scoreboard.db
+    volumes:
+      - scoreboard_data:/data
+
+volumes:
+  scoreboard_data:
