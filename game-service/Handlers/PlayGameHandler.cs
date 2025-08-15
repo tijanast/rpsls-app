@@ -1,5 +1,5 @@
 using System.Net.Http.Json;
-using GameService.Clients;
+using GameService.Interfaces;
 using GameService.Commands;
 using GameService.Services;
 using GameServices.Responses;

@@ -3,6 +3,8 @@ using ScoreboardService.Commands;
 using ScoreboardService.Interfaces;
 using ScoreboardService.Entities;
 
+namespace ScoreboardService.Handlers;
+
 public class CreateScoreRecordHandler : IRequestHandler<CreateScoreRecordCommand, Guid>
 {
     private readonly IScoreboardRepository _repo;

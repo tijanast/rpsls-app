@@ -3,6 +3,8 @@ using Rpsls.Contracts;
 using ScoreboardService.Interfaces;
 using ScoreboardService.Queries;
 
+namespace ScoreboardService.Handlers;
+
 public class GetScoreboardHandler : IRequestHandler<GetScoreboardQuery, IReadOnlyList<ScoreRecordDto>>
 {
     private readonly IScoreboardRepository _repo;

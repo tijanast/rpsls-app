@@ -1,6 +1,6 @@
 using System.Net.Http;
 using System.Net.Http.Json;
-using GameService.Clients;
+using GameService.Interfaces;
 using GameServices.Responses;
 using Rpsls.Contracts;
 

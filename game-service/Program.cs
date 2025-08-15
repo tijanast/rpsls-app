@@ -1,6 +1,6 @@
 using System.Reflection;
 using GameService.Adapters;
-using GameService.Clients;
+using GameService.Interfaces;
 using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);

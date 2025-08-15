@@ -1,5 +1,7 @@
-using GameService.Clients;
+using GameService.Interfaces;
 using Rpsls.Contracts;
+
+namespace GameService.Adapters;
 
 public class RandomChoiceClient : IRandomChoiceClient
 {

@@ -1,4 +1,4 @@
-namespace GameService.Clients;
+namespace GameService.Interfaces;
 
 public interface IRandomChoiceClient
 {
