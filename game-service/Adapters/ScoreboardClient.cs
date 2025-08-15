@@ -1,6 +1,7 @@
 using System.Net.Http;
 using System.Net.Http.Json;
 using GameService.Clients;
+using GameServices.Responses;
 using Rpsls.Contracts;
 
 namespace GameService.Adapters;
@@ -19,7 +20,7 @@ public class ScoreboardClient : IScoreboardClient
         var response = await _client.PostAsJsonAsync("api/scoreboard", request, cancellationToken);
         response.EnsureSuccessStatusCode();
 
-        var id = await response.Content.ReadFromJsonAsync<Guid>(cancellationToken: cancellationToken);
-        return id;
+        var createScoreResponse = await response.Content.ReadFromJsonAsync<CreateScoreResponse>(cancellationToken: cancellationToken);
+        return createScoreResponse?.Id ?? Guid.Empty;
     }
 }

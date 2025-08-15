@@ -67,5 +67,5 @@ networks:
   rpsls-net:
 
 volumes:
-  mssql_data:
+  scoreboard_data:
   scoreboard_migrations:
