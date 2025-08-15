@@ -1,12 +1,13 @@
 using MediatR;
+using ScoreboardService.Commands;
+using ScoreboardService.Interfaces;
 using ScoreboardService.Entities;
-using ScoreboardService.Persistence;
 
-namespace ScoreboardService.Application.Commands.CreateScoreRecord;
 public class CreateScoreRecordHandler : IRequestHandler<CreateScoreRecordCommand, Guid>
 {
-    private readonly ScoreboardDbContext _db;
-    public CreateScoreRecordHandler(ScoreboardDbContext db) => _db = db;
+    private readonly IScoreboardRepository _repo;
+
+    public CreateScoreRecordHandler(IScoreboardRepository repo) => _repo = repo;
 
     public async Task<Guid> Handle(CreateScoreRecordCommand request, CancellationToken ct)
     {
@@ -19,8 +20,7 @@ public class CreateScoreRecordHandler : IRequestHandler<CreateScoreRecordCommand
             Result = request.result,
             CreatedAt = DateTime.UtcNow
         };
-        _db.ScoreRecords.Add(entity);
-        await _db.SaveChangesAsync(ct);
-        return entity.Id;
+
+        return await _repo.CreateAsync(entity, ct);
     }
 }

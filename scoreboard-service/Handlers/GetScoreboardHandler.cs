@@ -1,20 +1,16 @@
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Rpsls.Contracts;
-using ScoreboardService.Persistence;
+using ScoreboardService.Interfaces;
+using ScoreboardService.Queries;
 
-namespace ScoreboardService.Application.Queries.GetScoreboard;
 public class GetScoreboardHandler : IRequestHandler<GetScoreboardQuery, IReadOnlyList<ScoreRecordDto>>
 {
-    private readonly ScoreboardDbContext _db;
-    public GetScoreboardHandler(ScoreboardDbContext db) => _db = db;
+    private readonly IScoreboardRepository _repo;
+
+    public GetScoreboardHandler(IScoreboardRepository repo) => _repo = repo;
 
     public async Task<IReadOnlyList<ScoreRecordDto>> Handle(GetScoreboardQuery request, CancellationToken ct)
     {
-        return await _db.ScoreRecords
-            .OrderByDescending(x => x.CreatedAt)
-            .Take(request.Take)
-            .Select(x => new ScoreRecordDto(x.Id, x.PlayerName, x.PlayerChoice, x.ComputerChoice, x.Result, x.CreatedAt))
-            .ToListAsync(ct);
+        return await _repo.GetLatestAsync(request.Take, ct);
     }
 }

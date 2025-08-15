@@ -1,5 +1,7 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Rpsls.Contracts;
+using RandomService.Application.Queries;
 
 namespace RandomService.Controllers;
 
@@ -10,13 +12,17 @@ namespace RandomService.Controllers;
 [Route("api/[controller]")]
 public class RandomController : ControllerBase
 {
-    private readonly Random _rng = new();
+    private readonly IMediator _mediator;
+
+    public RandomController(IMediator mediator) => _mediator = mediator;
 
     /// <summary>
     /// Returns a randomly selected choice.
     /// </summary>
-    /// <returns>A <see cref="RandomChoiceDto"/> containing the random choice.</returns>
     [HttpGet("choice")]
-    public ActionResult<RandomChoiceDto> GetChoice()
-        => Ok(new RandomChoiceDto(GameChoices.All[_rng.Next(GameChoices.All.Length)]));
+    public async Task<ActionResult<RandomChoiceDto>> GetChoice()
+    {
+        var result = await _mediator.Send(new GetRandomChoiceQuery());
+        return Ok(result);
+    }
 }

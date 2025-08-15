@@ -1,5 +1,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using ScoreboardService.Interfaces;
+using ScoreboardService.Repositories;
 using ScoreboardService.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Program.cs
+builder.Services.AddScoped<IScoreboardRepository, ScoreboardRepository>();
+
 
 var cs = builder.Configuration.GetConnectionString("DefaultConnection")
          ?? Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection");

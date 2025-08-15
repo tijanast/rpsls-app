@@ -1,8 +1,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Rpsls.Contracts;
-using ScoreboardService.Application.Commands.CreateScoreRecord;
-using ScoreboardService.Application.Queries.GetScoreboard;
+using ScoreboardService.Commands;
+using ScoreboardService.Queries;
 
 namespace ScoreboardService.API.Controllers;
 
