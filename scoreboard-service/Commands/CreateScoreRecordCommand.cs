@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace ScoreboardService.Application.Commands.CreateScoreRecord;
+namespace ScoreboardService.Commands;
 public record CreateScoreRecordCommand(
     string playerName,
     string playerChoice,

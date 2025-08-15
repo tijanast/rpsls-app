@@ -1,16 +1,30 @@
-using Rpsls.Contracts;
+using System.Reflection;
+using GameService.Adapters;
+using GameService.Interfaces;
+using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 
 // TODO: move to appsettings
-var randomBase = Environment.GetEnvironmentVariable("RANDOM_SERVICE_URL") ?? "http://random-service";
-var scoreboardBase = Environment.GetEnvironmentVariable("SCOREBOARD_SERVICE_URL") ?? "http://scoreboard-service";
+var randomBase = Environment.GetEnvironmentVariable("RANDOM_SERVICE_URL") ?? "http://localhost:5003";;
+var scoreboardBase = Environment.GetEnvironmentVariable("SCOREBOARD_SERVICE_URL") ?? "http://localhost:5002";
 
-builder.Services.AddHttpClient("RandomService", c => c.BaseAddress = new Uri(randomBase));
-builder.Services.AddHttpClient("ScoreboardService", c => c.BaseAddress = new Uri(scoreboardBase));
+builder.Services.AddHttpClient<IRandomChoiceClient, RandomChoiceClient>(client =>
+{
+    client.BaseAddress = new Uri(randomBase);
+});
+
+builder.Services.AddHttpClient<IScoreboardClient, ScoreboardClient>(client =>
+{
+    client.BaseAddress = new Uri(scoreboardBase);
+});
+
+
 
 builder.WebHost.ConfigureKestrel(options =>
 {
@@ -18,12 +32,12 @@ builder.WebHost.ConfigureKestrel(options =>
 });
 
 var app = builder.Build();
+
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger(); app.UseSwaggerUI();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
-// TODO: chc
-// app.UseHttpsRedirection();
 app.MapControllers();
 app.Run();
