@@ -1,8 +1,14 @@
-export default function ScoreboardButton() {
+import scoreboard from "../assets/scoreboard.png";
+
+type ScoreboardProps = {
+  onClick?: () => void;
+};
+
+export default function ScoreboardButton({ onClick }: ScoreboardProps) {
   return (
-    <button className="scoreboard-btn">
-        {/* TODO: put icon  */}
-      Scoreboard
-    </button>
+    <div onClick={onClick} className = "scoreboard-btn">
+      <img src={scoreboard} alt="Scoreboard" />
+      <p>Scoreboard</p>
+    </div>
   );
 }

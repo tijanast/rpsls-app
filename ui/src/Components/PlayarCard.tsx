@@ -13,6 +13,7 @@ export default function PlayerCard({ playerName, onNameChange, playerMove, onMov
     <div className="player-card">
       <img src={playerAvatar} alt="Player" className="avatar" />
       <input
+       className="name-input"
         type="text"
         placeholder="Enter your name"
         value={playerName}

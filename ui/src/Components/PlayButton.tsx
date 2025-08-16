@@ -1,4 +1,3 @@
-// PlayButton.tsx
 interface PlayButtonProps {
   onClick: () => void;
 }

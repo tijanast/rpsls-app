@@ -1,3 +1,4 @@
+/* Existing styles */
 body {
   margin: 0;
   background-color: #0b0d36;
@@ -18,15 +19,33 @@ body {
 }
 
 .scoreboard-btn {
+  width: 211px;
+  height: 46px;
   background-color: #2e356b;
   color: white;
   border: none;
   border-radius: 8px;
   padding: 8px 16px;
-  margin-bottom: 20px;
+  margin-bottom: 120px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 24px;
+  transition: transform 0.1s ease, background-color 0.2s ease;
+  display: flex;
+
+    p {
+      margin: auto;
+    }
 }
+
+.scoreboard-btn:hover {
+  background-color: #3b4180;
+}
+
+.scoreboard-btn:active {
+  transform: scale(0.95); /* fun “press” effect */
+  background-color: #4a4f9f; /* optional darker shade on click */
+}
+
 
 .game-container {
   display: flex;
@@ -37,6 +56,8 @@ body {
 }
 
 .player-card, .robot-card {
+  min-width: 240px;
+  max-height: 270px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,37 +70,77 @@ body {
 .avatar {
   width: 180px;
   height: auto;
-  border-radius: 50%;
 }
 
 .name-input {
   margin-top: 20px;
-  padding: 0 20px;         
   width: 200px;
-  height: 60px;
+  height: 30px;
+  padding: 0 20px;
   border-radius: 40px;
   border: none;
-  text-align: center;
-  font-style: italic;
-  font-size: 16px;          
-  outline: none;            
-  background-color: #2e356b; 
+  outline: none;
+  background-color: #2e356b;
   color: white;
+  font-style: italic;
+  font-size: 16px;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
 .name-input::placeholder {
-  color: #c0c0c0;           
+  color: #c0c0c0;
   font-style: italic;
 }
 
+.name-input:hover {
+  background-color: #3b4180;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+}
+
+.name-input:focus {
+  background-color: #454b8c;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  transform: scale(1.02);
+}
+
+
 .move-selector {
   margin-top: 10px;
-  padding: 10px;
-  border-radius: 20px;
+  width: 240px;
+  height: 30px;
+  padding: 0 20px;
+  border-radius: 40px;
   border: none;
   background-color: #2e356b;
   color: white;
+  font-size: 16px;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><polygon points='0,0 16,0 8,8' fill='white'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 12px;
 }
+
+.move-selector:hover {
+  background-color: #3b4180;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+}
+
+.move-selector:focus {
+  background-color: #454b8c;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  transform: scale(1.02);
+}
+
 
 .play-btn {
   background-color: #ef5b5b;
@@ -104,4 +165,76 @@ body {
   margin-top: 30px;
   font-size: 24px;
   font-weight: bold;
+}
+
+.scoreboard-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.scoreboard-modal {
+  width: 550px;
+  height: 550px;
+  background-color: #282B34;
+  border-radius: 20px;
+  padding: 20px;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+.scoreboard-modal h2 {
+  text-align: center;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.scoreboard-modal table {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+}
+
+.scoreboard-modal th,
+.scoreboard-modal td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.scoreboard-modal th {
+  color: #c0c0c0;
+  font-weight: bold;
+}
+
+.scoreboard-modal tbody tr:hover {
+  background-color: rgba(255,255,255,0.1);
+  transition: 0.2s;
+}
+
+.scoreboard-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+  font-size: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.scoreboard-close-btn:hover {
+  color: #ef5b5b;
 }
