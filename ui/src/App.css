@@ -1,0 +1,107 @@
+body {
+  margin: 0;
+  background-color: #0b0d36;
+  font-family: "Georgia", serif;
+  height: 100vh; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app {
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.scoreboard-btn {
+  background-color: #2e356b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.game-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.player-card, .robot-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #1c1f4a;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.avatar {
+  width: 180px;
+  height: auto;
+  border-radius: 50%;
+}
+
+.name-input {
+  margin-top: 20px;
+  padding: 0 20px;         
+  width: 200px;
+  height: 60px;
+  border-radius: 40px;
+  border: none;
+  text-align: center;
+  font-style: italic;
+  font-size: 16px;          
+  outline: none;            
+  background-color: #2e356b; 
+  color: white;
+}
+
+.name-input::placeholder {
+  color: #c0c0c0;           
+  font-style: italic;
+}
+
+.move-selector {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  background-color: #2e356b;
+  color: white;
+}
+
+.play-btn {
+  background-color: #ef5b5b;
+  color: white;
+  border: none;
+  padding: 20px 40px;
+  border-radius: 8px;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.play-btn:hover {
+  background-color: #e04848;
+}
+
+.robot-name {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.result-text {
+  margin-top: 30px;
+  font-size: 24px;
+  font-weight: bold;
+}
