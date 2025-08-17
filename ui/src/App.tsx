@@ -40,7 +40,6 @@ export default function App() {
 
   return (
     <div className="app">
-      {/* Scoreboard button now toggles modal */}
       <ScoreboardButton onClick={() => setShowScoreboard(true)} />
 
       <div className="game-container">

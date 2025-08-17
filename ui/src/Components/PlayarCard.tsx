@@ -1,4 +1,4 @@
-import MoveSelector from "./MoveSelector";
+import MoveSelector from "../Components/MoveSelectorComponent/MoveSelector";
 import playerAvatar from "../assets/player-avatar.png";
 
 interface PlayerCardProps {

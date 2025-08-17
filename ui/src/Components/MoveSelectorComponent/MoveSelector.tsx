@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./MoveSelector.css"
 
 interface MoveSelectorProps {
   selectedMove: string;
