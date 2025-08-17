@@ -27,6 +27,9 @@ cd <project-root>
 
 2. **Start all backend services via Docker Compose:**
 ```bash
+docker rm -f rpsls-sql              
+docker volume rm scoreboard_data
+docker volume create scoreboard_dataupdate
 docker-compose up --build 
 ```
 
