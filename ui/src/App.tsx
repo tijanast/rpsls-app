@@ -5,6 +5,7 @@ import PlayerCard from "./components/PlayerCardComponent/PlayarCard";
 import RobotCard from "./components/RobotCardComponent/RobotCard";
 import PlayButton from "./components/PlayButtonComponent/PlayButton";
 import ScoreboardModal from "./components/ScoreboardModalComponent/ScoreboardModal";
+import { usePlayGameMutation } from "./services/gameApi";
 
 export default function App() {
   const [playerName, setPlayerName] = useState("");
@@ -13,6 +14,8 @@ export default function App() {
   const [result, setResult] = useState("");
   const [showScoreboard, setShowScoreboard] = useState(false);
 
+  const [playGame, { isLoading }] = usePlayGameMutation();
+
   const handlePlay = async () => {
     if (!playerName) {
       alert("Please enter your name");
@@ -20,15 +23,7 @@ export default function App() {
     }
 
     try {
-      const response = await fetch("http://localhost:5001/api/Game/play", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ playerName, playerChoice: playerMove }),
-      });
-
-      if (!response.ok) throw new Error("Game service error");
-
-      const data = await response.json();
+      const data = await playGame({ playerName, playerChoice: playerMove }).unwrap();
       setResult(data.result);
       setRobotMove(data.computerChoice);
     } catch (err) {
@@ -48,7 +43,7 @@ export default function App() {
           playerMove={playerMove}
           onMoveChange={setPlayerMove}
         />
-        <PlayButton onClick={handlePlay} />
+        <PlayButton onClick={handlePlay} disabled={isLoading} />
         <RobotCard robotMove={robotMove} />
       </div>
 
