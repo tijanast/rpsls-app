@@ -7,4 +7,5 @@ public interface IScoreboardRepository
 {
     Task<Guid> CreateAsync(ScoreRecord entity, CancellationToken ct);
     Task<IReadOnlyList<ScoreRecordDto>> GetLatestAsync(int take, CancellationToken ct);
+    Task ResetAsync(CancellationToken ct); 
 }

@@ -23,9 +23,16 @@ public class ScoreboardController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ScoreRecordDto>>> Get([FromQuery] int take = 50)
+    public async Task<ActionResult<IEnumerable<ScoreRecordDto>>> Get([FromQuery] int take = 10)
     {
         var result = await _mediator.Send(new GetScoreboardQuery(take));
         return Ok(result);
+    }
+
+    [HttpDelete("reset")]
+    public async Task<IActionResult> Reset()
+    {
+        await _mediator.Send(new ResetScoreboardCommand());
+        return NoContent();
     }
 }
