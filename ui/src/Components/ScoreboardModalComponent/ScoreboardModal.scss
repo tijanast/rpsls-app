@@ -1,0 +1,27 @@
+.scoreboard-modal-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.scoreboard-modal {
+    position: relative;
+
+    h2 {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+}
+
+.scoreboard-reset-btn {
+    margin: 10px 0 20px 0;
+}
+
+.scoreboard-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}

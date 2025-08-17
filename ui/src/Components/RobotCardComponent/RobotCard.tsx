@@ -1,11 +1,12 @@
-import robotAvatar from "../assets/robot-avatar.png";
+import robotAvatar from "../../assets/robot-avatar.png";
+import "./RobotCard.scss";
 
 interface RobotCardProps {
   robotMove: string;
 }
 
 export default function RobotCard({ robotMove }: RobotCardProps) {
-    console.log(robotMove);
+  console.log(robotMove);
   return (
     <div className="robot-card">
       <img src={robotAvatar} alt="Robot" className="avatar" />

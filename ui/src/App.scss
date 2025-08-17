@@ -1,0 +1,36 @@
+body {
+  margin: 0;
+  background-color: #0b0d36;
+  font-family: "Georgia", serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app {
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.player-card,
+.robot-card {
+  min-width: 240px;
+  max-height: 270px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #1c1f4a;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.avatar {
+  width: 180px;
+  height: auto;
+}
