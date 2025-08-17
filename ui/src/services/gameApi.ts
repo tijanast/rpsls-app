@@ -2,7 +2,6 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import axios from 'axios';
 import type { Method } from 'axios';
 
-
 interface AxiosBaseQueryArgs {
   url: string;
   method: Method;
@@ -19,7 +18,10 @@ interface PlayGameResponse {
   computerChoice: string;
 }
 
-// Axios base instance
+interface MovesResponse {
+  moves: string[];
+}
+
 const axiosBaseQuery =
   ({ baseUrl }: { baseUrl: string }) =>
   async ({ url, method, data }: AxiosBaseQueryArgs) => {
@@ -47,7 +49,11 @@ export const gameApi = createApi({
         data: { playerName, playerChoice },
       }),
     }),
+    getMoves: builder.query<string[], void>({
+      query: () => ({ url: 'Game/choices', method: 'GET' }),
+      transformResponse: (response: string[]) => response,
+    }),
   }),
 });
 
-export const { usePlayGameMutation } = gameApi;
+export const { usePlayGameMutation, useGetMovesQuery } = gameApi;

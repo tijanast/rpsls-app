@@ -1,24 +1,30 @@
-import { useState } from "react";
-import "./App.css";
-import ScoreboardButton from "./components/ScoreboardButtonComponent/ScoreboardButton";
-import PlayerCard from "./components/PlayerCardComponent/PlayarCard";
-import RobotCard from "./components/RobotCardComponent/RobotCard";
-import PlayButton from "./components/PlayButtonComponent/PlayButton";
-import ScoreboardModal from "./components/ScoreboardModalComponent/ScoreboardModal";
-import { usePlayGameMutation } from "./services/gameApi";
+import { useState } from 'react';
+import './App.css';
+import ScoreboardButton from './components/ScoreboardButtonComponent/ScoreboardButton';
+import PlayerCard from './components/PlayerCardComponent/PlayarCard';
+import RobotCard from './components/RobotCardComponent/RobotCard';
+import PlayButton from './components/PlayButtonComponent/PlayButton';
+import ScoreboardModal from './components/ScoreboardModalComponent/ScoreboardModal';
+import MoveSelector from './components/MoveSelectorComponent/MoveSelector';
+import { usePlayGameMutation } from './services/gameApi';
 
 export default function App() {
-  const [playerName, setPlayerName] = useState("");
-  const [playerMove, setPlayerMove] = useState("");
-  const [robotMove, setRobotMove] = useState("");
-  const [result, setResult] = useState("");
+  const [playerName, setPlayerName] = useState('');
+  const [playerMove, setPlayerMove] = useState('');
+  const [robotMove, setRobotMove] = useState('');
+  const [result, setResult] = useState('');
   const [showScoreboard, setShowScoreboard] = useState(false);
 
   const [playGame, { isLoading }] = usePlayGameMutation();
 
   const handlePlay = async () => {
     if (!playerName) {
-      alert("Please enter your name");
+      alert('Please enter your name');
+      return;
+    }
+
+    if (!playerMove) {
+      alert('Please select a move');
       return;
     }
 
@@ -28,7 +34,7 @@ export default function App() {
       setRobotMove(data.computerChoice);
     } catch (err) {
       console.error(err);
-      alert("Failed to play the game");
+      alert('Failed to play the game');
     }
   };
 
@@ -47,12 +53,9 @@ export default function App() {
         <RobotCard robotMove={robotMove} />
       </div>
 
-      {result && <div className="result-text"> You {result.toLowerCase()}</div>}
+      {result && <div className="result-text">You {result.toLowerCase()}</div>}
 
-      <ScoreboardModal
-        open={showScoreboard}
-        onClose={() => setShowScoreboard(false)}
-      />
+      <ScoreboardModal open={showScoreboard} onClose={() => setShowScoreboard(false)} />
     </div>
   );
 }
