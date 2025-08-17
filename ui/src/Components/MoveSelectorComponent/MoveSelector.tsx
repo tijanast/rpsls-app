@@ -1,5 +1,5 @@
 import { useGetMovesQuery } from '../../services/gameApi';
-import './MoveSelector.css';
+import './MoveSelector.scss';
 
 interface MoveSelectorProps {
   selectedMove: string;

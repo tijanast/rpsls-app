@@ -1,5 +1,5 @@
 import scoreboard from "../../assets/scoreboard.png";
-import "./ScoreboardButton.css"
+import "./ScoreboardButton.scss"
 
 type ScoreboardProps = {
   onClick?: () => void;

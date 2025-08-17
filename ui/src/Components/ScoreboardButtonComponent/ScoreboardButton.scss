@@ -15,13 +15,13 @@
   p {
     margin: auto;
   }
-}
 
-.scoreboard-btn:hover {
-  background-color: #3b4180;
-}
+  &:hover {
+    background-color: #3b4180;
+  }
 
-.scoreboard-btn:active {
-  transform: scale(0.95);
-  background-color: #4a4f9f;
+  &:active {
+    transform: scale(0.95);
+    background-color: #4a4f9f;
+  }
 }

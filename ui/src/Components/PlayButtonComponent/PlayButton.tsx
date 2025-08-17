@@ -1,4 +1,4 @@
-import "./PlayButton.css";
+import "./PlayButton.scss";
 
 interface PlayButtonProps {
   onClick: () => void;

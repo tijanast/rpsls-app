@@ -1,6 +1,6 @@
 import MoveSelector from "../MoveSelectorComponent/MoveSelector";
 import playerAvatar from "../../assets/player-avatar.png";
-import "./PlayerCard.css"
+import "./PlayerCard.scss"
 
 interface PlayerCardProps {
   playerName: string;

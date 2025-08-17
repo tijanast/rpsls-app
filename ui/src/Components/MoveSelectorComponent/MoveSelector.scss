@@ -20,15 +20,15 @@
     background-repeat: no-repeat;
     background-position: right 15px center;
     background-size: 12px;
-}
 
-.move-selector:hover {
-    background-color: #3b4180;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
-}
+    &:hover {
+        background-color: #3b4180;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
 
-.move-selector:focus {
-    background-color: #454b8c;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-    transform: scale(1.02);
+    &:focus {
+        background-color: #454b8c;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        transform: scale(1.02);
+    }
 }

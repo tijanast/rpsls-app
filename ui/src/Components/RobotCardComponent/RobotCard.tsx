@@ -1,4 +1,5 @@
 import robotAvatar from "../../assets/robot-avatar.png";
+import "./RobotCard.scss";
 
 interface RobotCardProps {
   robotMove: string;

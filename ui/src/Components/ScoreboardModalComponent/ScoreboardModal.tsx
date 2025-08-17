@@ -1,5 +1,24 @@
-import { useGetScoresQuery, useResetScoresMutation, type ScoreEntry } from '../../services/scoreboardApi';
-import './ScoreboardModal.css';
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  CircularProgress,
+  Typography,
+} from "@mui/material";
+import {
+  useGetScoresQuery,
+  useResetScoresMutation,
+  type ScoreEntry,
+} from "../../services/scoreboardApi";
 
 interface ScoreboardModalProps {
   open: boolean;
@@ -13,60 +32,66 @@ export default function ScoreboardModal({ open, onClose }: ScoreboardModalProps)
   const [resetScores] = useResetScoresMutation();
 
   const handleReset = async () => {
-    if (!window.confirm('Are you sure you want to reset the scoreboard?')) return;
+    if (!window.confirm("Are you sure you want to reset the scoreboard?")) return;
 
     try {
       await resetScores().unwrap();
       refetch();
     } catch (err) {
-      console.error('Failed to reset scoreboard', err);
-      alert('Failed to reset scoreboard');
+      console.error("Failed to reset scoreboard", err);
+      alert("Failed to reset scoreboard");
     }
   };
 
-  if (!open) return null;
-
   return (
-    <div className="scoreboard-modal-overlay">
-      <div className="scoreboard-modal">
-        <button className="scoreboard-close-btn" onClick={onClose}>✕</button>
-        <h2>Game History</h2>
+    <Dialog open={open} onClose={onClose} fullWidth maxWidth="md">
+      <DialogTitle>Game History</DialogTitle>
 
-        <button className="scoreboard-reset-btn" onClick={handleReset}>
-          Reset Scoreboard
-        </button>
-
+      <DialogContent>
         {isLoading ? (
-          <p>Loading...</p>
+          <CircularProgress />
         ) : isError ? (
-          <p>Failed to load scores</p>
+          <Typography color="error">Failed to load scores</Typography>
         ) : (
-          <table>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Player</th>
-                <th>Player Move</th>
-                <th>Robot Move</th>
-                <th>Result</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {history.map((entry: ScoreEntry, idx: number) => (
-                <tr key={entry.id}>
-                  <td>{idx + 1}</td>
-                  <td>{entry.playerName}</td>
-                  <td>{entry.playerChoice}</td>
-                  <td>{entry.computerChoice}</td>
-                  <td>{entry.result}</td>
-                  <td>{new Date(entry.createdAt).toLocaleString()}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <TableContainer component={Paper} sx={{ color: "white" }}>
+            <Table sx={{ backgroundColor: "black" }}>
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={{ color: "white" }}>#</TableCell>
+                  <TableCell sx={{ color: "white" }}>Player</TableCell>
+                  <TableCell sx={{ color: "white" }}>Player Move</TableCell>
+                  <TableCell sx={{ color: "white" }}>Robot Move</TableCell>
+                  <TableCell sx={{ color: "white" }}>Result</TableCell>
+                  <TableCell sx={{ color: "white" }}>Date</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {history.map((entry: ScoreEntry, idx: number) => (
+                  <TableRow key={entry.id}>
+                    <TableCell sx={{ color: "white" }}>{idx + 1}</TableCell>
+                    <TableCell sx={{ color: "white" }}>{entry.playerName}</TableCell>
+                    <TableCell sx={{ color: "white" }}>{entry.playerChoice}</TableCell>
+                    <TableCell sx={{ color: "white" }}>{entry.computerChoice}</TableCell>
+                    <TableCell sx={{ color: "white" }}>{entry.result}</TableCell>
+                    <TableCell sx={{ color: "white" }}>
+                      {new Date(entry.createdAt).toLocaleString()}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         )}
-      </div>
-    </div>
+      </DialogContent>
+
+      <DialogActions>
+        <Button onClick={handleReset} color="error" variant="outlined">
+          Reset Scoreboard
+        </Button>
+        <Button onClick={onClose} color="primary" variant="contained">
+          Close
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 }

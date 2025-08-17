@@ -6,8 +6,8 @@
   border-radius: 8px;
   font-size: 28px;
   cursor: pointer;
-}
 
-.play-btn:hover {
-  background-color: #e04848;
+  &:hover {
+    background-color: #e04848;
+  }
 }
