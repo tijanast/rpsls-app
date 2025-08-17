@@ -10,13 +10,6 @@ export interface ScoreEntry {
   createdAt: string;
 }
 
-interface SaveScoreRequest {
-  playerName: string;
-  playerChoice: string;
-  computerChoice: string;
-  result: string;
-}
-
 export const scoreboardApi = createApi({
   reducerPath: "scoreboardApi",
   baseQuery: axiosBaseQuery({ baseUrl: "http://localhost:5002/api/" }),
@@ -26,19 +19,11 @@ export const scoreboardApi = createApi({
     }),
     resetScores: builder.mutation<void, void>({
       query: () => ({ url: "Scoreboard", method: "DELETE" }),
-    }),
-    saveScore: builder.mutation<ScoreEntry, SaveScoreRequest>({
-      query: (score) => ({
-        url: "Scoreboard",
-        method: "POST",
-        data: score,
-      }),
-    }),
+    })
   }),
 });
 
 export const {
   useGetScoresQuery,
-  useResetScoresMutation,
-  useSaveScoreMutation,
+  useResetScoresMutation
 } = scoreboardApi;

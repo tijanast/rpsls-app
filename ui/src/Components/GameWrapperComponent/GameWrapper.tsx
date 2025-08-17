@@ -5,7 +5,6 @@ import RobotCard from "../RobotCardComponent/RobotCard";
 import PlayButton from "../PlayButtonComponent/PlayButton";
 import ScoreboardModal from "../ScoreboardModalComponent/ScoreboardModal";
 import { usePlayGameMutation } from "../../services/gameApi";
-import { useSaveScoreMutation } from "../../services/scoreboardApi";
 import "./GameWrapper.scss";
 
 export default function GameWrapper() {
@@ -16,7 +15,6 @@ export default function GameWrapper() {
   const [showScoreboard, setShowScoreboard] = useState(false);
 
   const [playGame, { isLoading }] = usePlayGameMutation();
-  const [saveScore] = useSaveScoreMutation();
 
   const handlePlay = async () => {
     if (!playerName || !playerMove) return;
@@ -25,13 +23,6 @@ export default function GameWrapper() {
       const data = await playGame({ playerName, playerChoice: playerMove }).unwrap();
       setResult(data.result);
       setRobotMove(data.computerChoice);
-
-      await saveScore({
-        playerName,
-        playerChoice: playerMove,
-        computerChoice: data.computerChoice,
-        result: data.result,
-      }).unwrap();
     } catch (err) {
       console.error(err);
       alert("Failed to play the game or save score");
