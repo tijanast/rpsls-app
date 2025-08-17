@@ -1,10 +1,10 @@
 import { useState } from "react";
 import "./App.css";
-import ScoreboardButton from "./Components/ScoreboardButtonComponent/ScoreboardButton";
-import PlayerCard from "./Components/PlayerCardComponent/PlayarCard";
-import RobotCard from "./Components/RobotCardComponent/RobotCard";
-import PlayButton from "./Components/PlayButtonComponent/PlayButton";
-import ScoreboardModal from "./Components/ScoreboardModalComponent/ScoreboardModal";
+import ScoreboardButton from "./components/ScoreboardButtonComponent/ScoreboardButton";
+import PlayerCard from "./components/PlayerCardComponent/PlayarCard";
+import RobotCard from "./components/RobotCardComponent/RobotCard";
+import PlayButton from "./components/PlayButtonComponent/PlayButton";
+import ScoreboardModal from "./components/ScoreboardModalComponent/ScoreboardModal";
 
 export default function App() {
   const [playerName, setPlayerName] = useState("");
@@ -29,7 +29,6 @@ export default function App() {
       if (!response.ok) throw new Error("Game service error");
 
       const data = await response.json();
-      console.log(data);
       setResult(data.result);
       setRobotMove(data.computerChoice);
     } catch (err) {
