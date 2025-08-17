@@ -1,0 +1,27 @@
+.scoreboard-btn {
+  width: 211px;
+  height: 46px;
+  background-color: #2e356b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin-bottom: 120px;
+  cursor: pointer;
+  font-size: 24px;
+  transition: transform 0.1s ease, background-color 0.2s ease;
+  display: flex;
+
+    p {
+      margin: auto;
+    }
+}
+
+.scoreboard-btn:hover {
+  background-color: #3b4180;
+}
+
+.scoreboard-btn:active {
+  transform: scale(0.95);
+  background-color: #4a4f9f;
+}

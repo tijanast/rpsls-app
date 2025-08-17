@@ -1,10 +1,10 @@
 import { useState } from "react";
 import "./App.css";
-import ScoreboardButton from "./Components/ScoreBoardButton";
-import PlayerCard from "./Components/PlayerCard/PlayarCard";
-import RobotCard from "./Components/RobotCard";
-import PlayButton from "./Components/PlayButton";
-import ScoreboardModal from "./Components/ScoreboardModal";
+import ScoreboardButton from "./Components/ScoreboardButton/ScoreboardButton";
+import PlayerCard from "./Components/PlayerCardComponent/PlayarCard";
+import RobotCard from "./Components/RobotCardComponent/RobotCard";
+import PlayButton from "./Components/PlayButtonComponent/PlayButton";
+import ScoreboardModal from "./Components/ScoreboardModalComponent/ScoreboardModal";
 
 export default function App() {
   const [playerName, setPlayerName] = useState("");
