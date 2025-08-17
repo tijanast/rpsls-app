@@ -1,5 +1,8 @@
 # Rock-Paper-Scissors-Lizard-Spock (RPSLS) App
 
+Note: in a production environment, connection strings, passwords, and other secrets must be saved in environment variables or a secret manager (or in .env file for local testing).
+For this app, they are directly included in docker and service files for simplicity.
+
 This project contains a **frontend UI** and **backend services** for the RPSLS game. Backend services are Dockerized and include:
 
 - `game-service` – Handles game logic
