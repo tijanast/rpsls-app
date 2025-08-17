@@ -8,48 +8,48 @@ import { usePlayGameMutation } from "../../services/gameApi";
 import "./GameWrapper.scss";
 
 export default function GameWrapper() {
-  const [playerName, setPlayerName] = useState("");
-  const [playerMove, setPlayerMove] = useState("");
-  const [robotMove, setRobotMove] = useState("");
-  const [result, setResult] = useState("");
-  const [showScoreboard, setShowScoreboard] = useState(false);
+    const [playerName, setPlayerName] = useState("");
+    const [playerMove, setPlayerMove] = useState("");
+    const [robotMove, setRobotMove] = useState("");
+    const [result, setResult] = useState("");
+    const [showScoreboard, setShowScoreboard] = useState(false);
 
-  const [playGame, { isLoading }] = usePlayGameMutation();
+    const [playGame, { isLoading }] = usePlayGameMutation();
 
-  const handlePlay = async () => {
-    if (!playerName || !playerMove) return;
+    const handlePlay = async () => {
+        if (!playerName || !playerMove) return;
 
-    try {
-      const data = await playGame({ playerName, playerChoice: playerMove }).unwrap();
-      setResult(data.result);
-      setRobotMove(data.computerChoice);
-    } catch (err) {
-      console.error(err);
-      alert("Failed to play the game or save score");
-    }
-  };
+        try {
+            const data = await playGame({ playerName, playerChoice: playerMove }).unwrap();
+            setResult(data.result);
+            setRobotMove(data.computerChoice);
+        } catch (err) {
+            console.error(err);
+            alert("Failed to play the game or save score");
+        }
+    };
 
-  return (
-    <div className="app">
-      <ScoreboardButton onClick={() => setShowScoreboard(true)} />
+    return (
+        <div className="app">
+            <ScoreboardButton onClick={() => setShowScoreboard(true)} />
 
-      <div className="game-container">
-        <PlayerCard
-          playerName={playerName}
-          onNameChange={setPlayerName}
-          playerMove={playerMove}
-          onMoveChange={setPlayerMove}
-        />
-        <PlayButton onClick={handlePlay} disabled={isLoading} />
-        <RobotCard robotMove={robotMove} />
-      </div>
+            <div className="game-container">
+                <PlayerCard
+                    playerName={playerName}
+                    onNameChange={setPlayerName}
+                    playerMove={playerMove}
+                    onMoveChange={setPlayerMove}
+                />
+                <PlayButton onClick={handlePlay} disabled={isLoading} />
+                <RobotCard robotMove={robotMove} />
+            </div>
 
-      {result && <div className="result-text">You {result.toLowerCase()}</div>}
+            {result && <div className="result-text">You {result.toLowerCase()}</div>}
 
-      <ScoreboardModal
-        open={showScoreboard}
-        onClose={() => setShowScoreboard(false)}
-      />
-    </div>
-  );
+            <ScoreboardModal
+                open={showScoreboard}
+                onClose={() => setShowScoreboard(false)}
+            />
+        </div>
+    );
 }

@@ -7,7 +7,7 @@ type ScoreboardProps = {
 
 export default function ScoreboardButton({ onClick }: ScoreboardProps) {
   return (
-    <div onClick={onClick} className = "scoreboard-btn">
+    <div onClick={onClick} className="scoreboard-btn">
       <img src={scoreboard} alt="Scoreboard" />
       <p>Scoreboard</p>
     </div>
