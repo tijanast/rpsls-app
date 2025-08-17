@@ -12,7 +12,7 @@
   font-size: 16px;
   text-align: center;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .name-input::placeholder {
@@ -22,11 +22,11 @@
 
 .name-input:hover {
   background-color: #3b4180;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
-}s
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
 
-.name-input:focus {
+s .name-input:focus {
   background-color: #454b8c;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
   transform: scale(1.02);
 }

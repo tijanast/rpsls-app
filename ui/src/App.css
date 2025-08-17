@@ -2,7 +2,7 @@ body {
   margin: 0;
   background-color: #0b0d36;
   font-family: "Georgia", serif;
-  height: 100vh; 
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,7 +25,8 @@ body {
   flex-wrap: wrap;
 }
 
-.player-card, .robot-card {
+.player-card,
+.robot-card {
   min-width: 240px;
   max-height: 270px;
   display: flex;

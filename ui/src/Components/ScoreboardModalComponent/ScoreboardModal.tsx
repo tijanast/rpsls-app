@@ -1,46 +1,26 @@
-import React, { useState, useEffect } from "react";
-import "./ScoreboardModal.css"
-
-interface ScoreEntry {
-  id: string;
-  playerName: string;
-  playerChoice: string;
-  computerChoice: string;
-  result: string;
-  createdAt: string;
-}
+import { useGetScoresQuery, useResetScoresMutation, type ScoreEntry } from '../../services/scoreboardApi';
+import './ScoreboardModal.css';
 
 interface ScoreboardModalProps {
   open: boolean;
   onClose: () => void;
 }
 
-const ScoreboardModal: React.FC<ScoreboardModalProps> = ({ open, onClose }) => {
-  const [history, setHistory] = useState<ScoreEntry[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (open) {
-      setLoading(true);
-      fetch("http://localhost:5002/api/Scoreboard?take=10")
-        .then((res) => res.json())
-        .then((data: ScoreEntry[]) => setHistory(data))
-        .catch(console.error)
-        .finally(() => setLoading(false));
-    }
-  }, [open]);
+export default function ScoreboardModal({ open, onClose }: ScoreboardModalProps) {
+  const { data: history = [], isLoading, isError, refetch } = useGetScoresQuery(open ? 10 : 0, {
+    skip: !open,
+  });
+  const [resetScores] = useResetScoresMutation();
 
   const handleReset = async () => {
-    if (!window.confirm("Are you sure you want to reset the scoreboard?")) return;
+    if (!window.confirm('Are you sure you want to reset the scoreboard?')) return;
 
     try {
-      await fetch("http://localhost:5002/api/Scoreboard", {
-        method: "DELETE",
-      });
-      setHistory([]);
+      await resetScores().unwrap();
+      refetch();
     } catch (err) {
-      console.error("Failed to reset scoreboard", err);
-      alert("Failed to reset scoreboard");
+      console.error('Failed to reset scoreboard', err);
+      alert('Failed to reset scoreboard');
     }
   };
 
@@ -52,13 +32,14 @@ const ScoreboardModal: React.FC<ScoreboardModalProps> = ({ open, onClose }) => {
         <button className="scoreboard-close-btn" onClick={onClose}>✕</button>
         <h2>Game History</h2>
 
-        {/* Reset button */}
         <button className="scoreboard-reset-btn" onClick={handleReset}>
           Reset Scoreboard
         </button>
 
-        {loading ? (
+        {isLoading ? (
           <p>Loading...</p>
+        ) : isError ? (
+          <p>Failed to load scores</p>
         ) : (
           <table>
             <thead>
@@ -72,7 +53,7 @@ const ScoreboardModal: React.FC<ScoreboardModalProps> = ({ open, onClose }) => {
               </tr>
             </thead>
             <tbody>
-              {history.map((entry, idx) => (
+              {history.map((entry: ScoreEntry, idx: number) => (
                 <tr key={entry.id}>
                   <td>{idx + 1}</td>
                   <td>{entry.playerName}</td>
@@ -88,6 +69,4 @@ const ScoreboardModal: React.FC<ScoreboardModalProps> = ({ open, onClose }) => {
       </div>
     </div>
   );
-};
-
-export default ScoreboardModal;
+}

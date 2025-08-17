@@ -5,11 +5,11 @@ import PlayerCard from './components/PlayerCardComponent/PlayarCard';
 import RobotCard from './components/RobotCardComponent/RobotCard';
 import PlayButton from './components/PlayButtonComponent/PlayButton';
 import ScoreboardModal from './components/ScoreboardModalComponent/ScoreboardModal';
-import MoveSelector from './components/MoveSelectorComponent/MoveSelector';
 import { usePlayGameMutation } from './services/gameApi';
+import { useSaveScoreMutation } from './services/scoreboardApi';
 
 export default function App() {
-  const [playerName, setPlayerName] = useState('');
+  const [playerName, setPlayerName] = useState(''); // or maybe useReducer?
   const [playerMove, setPlayerMove] = useState('');
   const [robotMove, setRobotMove] = useState('');
   const [result, setResult] = useState('');
@@ -17,26 +17,28 @@ export default function App() {
 
   const [playGame, { isLoading }] = usePlayGameMutation();
 
-  const handlePlay = async () => {
-    if (!playerName) {
-      alert('Please enter your name');
-      return;
-    }
+  const [saveScore] = useSaveScoreMutation();
 
-    if (!playerMove) {
-      alert('Please select a move');
-      return;
-    }
+  const handlePlay = async () => {
+    if (!playerName || !playerMove) return;
 
     try {
       const data = await playGame({ playerName, playerChoice: playerMove }).unwrap();
       setResult(data.result);
       setRobotMove(data.computerChoice);
+
+      await saveScore({
+        playerName,
+        playerChoice: playerMove,
+        computerChoice: data.computerChoice,
+        result: data.result,
+      }).unwrap();
     } catch (err) {
       console.error(err);
-      alert('Failed to play the game');
+      alert('Failed to play the game or save score');
     }
   };
+
 
   return (
     <div className="app">

@@ -18,25 +18,21 @@ interface PlayGameResponse {
   computerChoice: string;
 }
 
-interface MovesResponse {
-  moves: string[];
-}
-
 const axiosBaseQuery =
   ({ baseUrl }: { baseUrl: string }) =>
-  async ({ url, method, data }: AxiosBaseQueryArgs) => {
-    try {
-      const result = await axios({ url: baseUrl + url, method, data });
-      return { data: result.data };
-    } catch (axiosError: any) {
-      return {
-        error: {
-          status: axiosError.response?.status,
-          data: axiosError.response?.data || axiosError.message,
-        },
-      };
-    }
-  };
+    async ({ url, method, data }: AxiosBaseQueryArgs) => {
+      try {
+        const result = await axios({ url: baseUrl + url, method, data });
+        return { data: result.data };
+      } catch (axiosError: any) {
+        return {
+          error: {
+            status: axiosError.response?.status,
+            data: axiosError.response?.data || axiosError.message,
+          },
+        };
+      }
+    };
 
 export const gameApi = createApi({
   reducerPath: 'gameApi',

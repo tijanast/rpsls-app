@@ -12,9 +12,9 @@
   transition: transform 0.1s ease, background-color 0.2s ease;
   display: flex;
 
-    p {
-      margin: auto;
-    }
+  p {
+    margin: auto;
+  }
 }
 
 .scoreboard-btn:hover {
