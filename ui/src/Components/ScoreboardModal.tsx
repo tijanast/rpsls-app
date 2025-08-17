@@ -21,7 +21,7 @@ const ScoreboardModal: React.FC<ScoreboardModalProps> = ({ open, onClose }) => {
   useEffect(() => {
     if (open) {
       setLoading(true);
-      fetch("http://localhost:5002/api/Scoreboard?take=50")
+      fetch("http://localhost:5002/api/Scoreboard?take=10")
         .then((res) => res.json())
         .then((data: ScoreEntry[]) => setHistory(data))
         .catch(console.error)

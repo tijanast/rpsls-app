@@ -35,4 +35,10 @@ public class ScoreboardRepository : IScoreboardRepository
                 x.CreatedAt))
             .ToListAsync(ct);
     }
+
+    public async Task ResetAsync(CancellationToken ct)
+    {
+        _db.ScoreRecords.RemoveRange(_db.ScoreRecords);
+        await _db.SaveChangesAsync(ct);
+    }
 }
