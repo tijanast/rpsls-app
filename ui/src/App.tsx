@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import ScoreboardButton from "./Components/ScoreBoardButton";
-import PlayerCard from "./Components/PlayarCard";
+import PlayerCard from "./Components/PlayerCard.tsx/PlayarCard";
 import RobotCard from "./Components/RobotCard";
 import PlayButton from "./Components/PlayButton";
 import ScoreboardModal from "./Components/ScoreboardModal";
