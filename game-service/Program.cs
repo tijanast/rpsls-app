@@ -3,6 +3,8 @@ using GameService.Adapters;
 using GameService.Interfaces;
 using MediatR;
 
+//TODO: move dependency logic in DependencyInjection.cs
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add CORS policy
@@ -54,3 +56,4 @@ app.UseCors("AllowFrontend");
 
 app.MapControllers();
 app.Run();
+
